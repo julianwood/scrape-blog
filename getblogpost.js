@@ -1,21 +1,6 @@
 const request = require('request');
 const cheerio = require('cheerio');
 
-
-function formatDate(date) {
-    const d = new Date(date),
-    month = '' + (d.getMonth() + 1),
-    day = '' + d.getDate(),
-    year = d.getFullYear();
-
-    if (month.length < 2) 
-        month = '0' + month;
-    if (day.length < 2) 
-        day = '0' + day;
-
-    return [year, month, day].join('-');
-}
-
 // const url = 'https://aws.amazon.com/blogs/compute/building-well-architected-serverless-applications-introduction/';
 const url = process.argv[2];
 request(url, function (error, response, responseHtml) {
@@ -36,7 +21,7 @@ request(url, function (error, response, responseHtml) {
         $intro = $('meta[property="og:description"]').attr('content'),
         $author = $('meta[name="twitter:creator"]').attr('content'),
         $author = $('footer.blog-post-meta').children().eq(0).text(),
-        $date = $('meta[property="og:updated_time"]').attr('content'),
+        $date = $('meta[property="article:published_time"]').attr('content'),
         $link = $('meta[property="og:url"]').attr('content'),
         $image = $('meta[property="og:image"]').attr('content'),
         $tags = $('meta[property="article:tag"]');
