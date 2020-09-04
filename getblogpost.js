@@ -35,7 +35,7 @@ request(url, function (error, response, responseHtml) {
         $ = cheerio.load(responseHtml),
         //create a reference to the meta elements
         $title = $('head title').text(),
-        $intro = $('meta[name="description"]').attr('content'),
+        $intro = $('meta[property="og:description"]').attr('content'),
         $author = $('meta[name="twitter:creator"]').attr('content'),
         $author = $('footer.blog-post-meta').children().eq(0).text(),
         $date = $('meta[property="og:updated_time"]').attr('content'),
