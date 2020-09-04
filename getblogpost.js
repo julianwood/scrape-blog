@@ -52,10 +52,11 @@ request(url, function (error, response, responseHtml) {
     }
 
     if ($tags) {
-        blogobj.tags = [];
+        let mySet = new Set()
         for (var i = 0; i < $tags.length; i++) {
-            blogobj.tags.push($($tags[i]).attr('content'));
+            mySet.add($($tags[i]).attr('content'));
         }
+        blogobj.tags = Array.from(mySet)
     }
     console.log(JSON.stringify(blogobj, null, '\t'));
 }) ;
